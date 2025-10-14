@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17.4
+    container_name: db_erp_tiagolima
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_MULTIPLE_DATABASES: erpprodutos, erppedidos, erpclientes
+    ports:
+      - "5555:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
