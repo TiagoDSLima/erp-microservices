@@ -1,0 +1,34 @@
+package com.tiagolima.erp.clientes.model;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Table(name = "clientes")
+@Data
+public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigo;
+    @Column(name = "nome", length = 150, nullable = false)
+    private String nome;
+    @Column(name = "cpf", length = 11, nullable = false)
+    private String cpf;
+    @Column(name = "logradouro", length = 100)
+    private String logradouro;
+    @Column(name = "numero", length = 10)
+    private String numero;
+    @Column(name = "bairro", length = 100)
+    private String bairro;
+    @Column(name = "email", length = 150)
+    private String email;
+    @Column(name = "telefone", length = 20)
+    private String telefone;
+
+
+}
