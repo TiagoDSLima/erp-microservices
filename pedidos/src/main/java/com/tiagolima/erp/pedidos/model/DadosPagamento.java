@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class DadosPagamento {
 
-    private String chavePix;
     private String numeroCartao;
     private String validade;
     private String codigoCartao;

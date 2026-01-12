@@ -23,10 +23,3 @@ public class PedidoController {
     }
 
 }
-
-
-
-Map<Long, Cliente> clientesPorId =
-        clientes.stream().collect(Collectors.toMap(Cliente::getId, c -> c));
-
-pedidos.forEach(p -> p.setCliente(clientesPorId.get(p.getClienteId())));

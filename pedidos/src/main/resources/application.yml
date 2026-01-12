@@ -17,3 +17,11 @@ spring:
 
 server:
   port: 8083
+
+erpmicroservices:
+  pedido:
+    clients:
+      produtos:
+        url: 'http://localhost:8081/produtos'
+      clientes:
+        url: 'http://localhost:8082/clientes'
