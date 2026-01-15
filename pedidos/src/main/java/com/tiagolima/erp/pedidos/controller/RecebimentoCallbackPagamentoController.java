@@ -32,7 +32,7 @@ public class RecebimentoCallbackPagamentoController {
             return erro;
         }
 
-        pedidoService.atualizarStatusPagamento(body.codigo(), body.chavePagamento(), body.status(), body.observacoes());
+        pedidoService.atualizarStatusPagamento(body.codigoPedido(), body.chavePagamento(), body.status(), body.observacoes());
         return ResponseEntity.ok().build();
     }
 

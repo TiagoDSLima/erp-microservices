@@ -1,9 +1,11 @@
 package com.tiagolima.erp.pedidos.model;
 
 import com.tiagolima.erp.pedidos.enums.TipoPagamento;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class DadosPagamento {
 
     private String numeroCartao;

@@ -13,4 +13,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
     boolean existsByChavePagamento(String chavePagamento);
 
     boolean existsByCodigo(Long codigo);
+
+    Optional<Pedido> findByCodigo(Long codigo);
 }
