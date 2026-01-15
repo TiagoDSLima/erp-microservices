@@ -2,6 +2,8 @@ package com.tiagolima.erp.pedidos.service;
 
 import com.tiagolima.erp.pedidos.client.ServicoBancarioClient;
 import com.tiagolima.erp.pedidos.dto.NovoPedidoDto;
+import com.tiagolima.erp.pedidos.enums.StatusPedido;
+import com.tiagolima.erp.pedidos.exception.ValidationException;
 import com.tiagolima.erp.pedidos.mappers.PedidoMapper;
 import com.tiagolima.erp.pedidos.model.Pedido;
 import com.tiagolima.erp.pedidos.repository.ItemPedidoRepository;
@@ -9,10 +11,14 @@ import com.tiagolima.erp.pedidos.repository.PedidoRepository;
 import com.tiagolima.erp.pedidos.validator.PedidoValidator;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PedidoService {
 
     private final PedidoRepository pedidoRepository;
@@ -25,18 +31,59 @@ public class PedidoService {
     public Pedido criarPedido(NovoPedidoDto novoPedidoDto) {
         var pedido = pedidoMapper.map(novoPedidoDto);
         pedidoValidator.validar(pedido);
-        realizarPersistencia(pedido);
+        realizarPersistenciaPedidosEItens(pedido);
         geraChavePagamento(pedido);
         return pedido;
     }
 
-    private void realizarPersistencia(Pedido pedido) {
+    private void realizarPersistenciaPedidosEItens(Pedido pedido) {
         pedidoRepository.save(pedido);
         itemPedidoRepository.saveAll(pedido.getItens());
+    }
+
+    private void realizarPersistenciaPedido(Pedido pedido) {
+        pedidoRepository.save(pedido);
     }
 
     public void geraChavePagamento(Pedido pedido) {
         pedido.setChavePagamento(servicoBancarioClient.solicitarPagamento(pedido));
     }
 
+    public void atualizarStatusPagamento(Long codigo, String chavePagamento, boolean sucesso, String observacoes) {
+        var pedidoEncontrado = buscaPedidoPorCodigoEChavePagamento(codigo, chavePagamento);
+
+        if(pedidoEncontrado.isEmpty()) {
+            var msg = String.format("Pedido não encontrado para o código %d e chave de pagamento %s", codigo, chavePagamento);
+            log.error(msg);
+            if(naoExistePedidoComChavePagamento(chavePagamento)){
+                throw new ValidationException("chavePagamento", String.format("Pedido não encontrado para a chave de pagamento %s", chavePagamento));
+            } else if(naoExistePedidoComCodigo(codigo)) {
+                throw new ValidationException("codigo", String.format("Pedido não encontrado para o código %d", codigo));
+            } else {
+                throw new ValidationException("chavePagamento/codigo", msg);
+            }
+        }
+
+        Pedido pedido = pedidoEncontrado.get();
+
+        if(sucesso){
+            pedido.setStatus(StatusPedido.PAGO);
+        } else {
+            pedido.setStatus(StatusPedido.ERRO_PAGAMENTO);
+            pedido.setObservacoes(observacoes);
+        }
+        realizarPersistenciaPedido(pedido);
+    }
+
+    private Optional<Pedido> buscaPedidoPorCodigoEChavePagamento(Long codigo, String chavePagamento) {
+        return pedidoRepository.findByCodigoAndChavePagamento(codigo, chavePagamento);
+    }
+
+    private boolean naoExistePedidoComChavePagamento(String chavePagamento) {
+        return !pedidoRepository.existsByChavePagamento(chavePagamento);
+    }
+
+    private boolean naoExistePedidoComCodigo(Long codigo) {
+        return !pedidoRepository.existsByCodigo(codigo);
+    }
 }

@@ -25,3 +25,5 @@ erpmicroservices:
         url: 'http://localhost:8081/produtos'
       clientes:
         url: 'http://localhost:8082/clientes'
+    webhook:
+      api-key: 'API_KEY_TESTE_123'
