@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public class ValidationException extends RuntimeException {
 
-    private String field;
-    private String message;
-    public ValidationException(String field, String message) {
-        super(message);
-        this.field = field;
-        this.message = message;
+    private String campo;
+    private String mensagem;
+    public ValidationException(String campo, String mensagem) {
+        super(mensagem);
+        this.campo = campo;
+        this.mensagem = mensagem;
     }
 }
