@@ -27,3 +27,10 @@ erpmicroservices:
         url: 'http://localhost:8082/clientes'
     webhook:
       api-key: 'API_KEY_TESTE_123'
+  config:
+    kafka:
+      server-url: 'http://localhost:29092'
+      topics:
+        pedidos-pagos: 'erp.pedidos-pagos'
+        pedidos-faturados: 'erp.pedidos-faturados'
+        pedidos-enviados: 'erp.pedidos-enviados'
