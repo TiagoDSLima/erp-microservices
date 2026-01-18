@@ -1,5 +1,6 @@
 package com.tiagolima.erp.pedidos.model;
 
+import com.tiagolima.erp.pedidos.client.representation.ClienteRepresentation;
 import com.tiagolima.erp.pedidos.enums.StatusPedido;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -58,6 +59,9 @@ public class Pedido {
 
     @Transient
     private DadosPagamento dadosPagamento;
+
+    @Transient
+    private ClienteRepresentation dadosCliente;
 
     @OneToMany(mappedBy = "pedido")
     private List<ItemPedido> itens;

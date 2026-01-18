@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,4 +41,6 @@ public class ItemPedido {
     @Column(name = "valor_unitario", precision = 16, scale = 2)
     private BigDecimal valorUnitario;
 
+    @Transient
+    private String nomeProduto;
 }
