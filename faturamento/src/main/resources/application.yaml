@@ -1,3 +1,12 @@
 spring:
   application:
     name: faturamento
+
+server:
+  port: 8084
+
+minio:
+  url: 'http://localhost:9100'
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: erp.faturas
