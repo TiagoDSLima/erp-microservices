@@ -12,6 +12,7 @@ import com.tiagolima.erp.pedidos.mappers.PedidoMapper;
 import com.tiagolima.erp.pedidos.model.DadosPagamento;
 import com.tiagolima.erp.pedidos.model.ItemPedido;
 import com.tiagolima.erp.pedidos.model.Pedido;
+import com.tiagolima.erp.pedidos.publisher.PagamentoPublisher;
 import com.tiagolima.erp.pedidos.repository.ItemPedidoRepository;
 import com.tiagolima.erp.pedidos.repository.PedidoRepository;
 import com.tiagolima.erp.pedidos.validator.PedidoValidator;
@@ -36,6 +37,7 @@ public class PedidoService {
     private final ServicoBancarioClient servicoBancarioClient;
     private final ClientesClient clientesClient;
     private final ProdutosClient produtosClient;
+    private final PagamentoPublisher pagamentoPublisher;
 
     @Transactional
     public Pedido criarPedido(NovoPedidoDto novoPedidoDto) {
@@ -70,6 +72,9 @@ public class PedidoService {
         if(sucesso){
             pedido.setStatus(StatusPedido.PAGO);
             pedido.setObservacoes("Pagamento feito!");
+            carregarDadosCliente(pedido);
+            carregarItensPedido(pedido);
+            pagamentoPublisher.publicar(pedido);
         } else {
             pedido.setStatus(StatusPedido.ERRO_PAGAMENTO);
             pedido.setObservacoes(observacoes);
