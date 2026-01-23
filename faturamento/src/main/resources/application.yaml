@@ -2,6 +2,12 @@ spring:
   application:
     name: faturamento
 
+erpmicroservices:
+  config:
+    kafka:
+      topics:
+        pedidos-pagos: 'erp.pedidos-pagos'
+
 server:
   port: 8084
 
