@@ -32,13 +32,13 @@ public class BucketService {
         }
     }
 
-    public String getUrl(String fileName){
+    public String getUrl(Long codigoPedido){
         try{
             var obejct = GetPresignedObjectUrlArgs
                     .builder()
                     .method(Method.GET)
                     .bucket(minioProps.getBucketName())
-                    .object(fileName)
+                    .object(retornaNome(codigoPedido))
                     .expiry(1, TimeUnit.HOURS)
                     .build();
 
@@ -46,5 +46,9 @@ public class BucketService {
         } catch(Exception e){
             throw new RuntimeException(e);
         }
+    }
+
+    private String retornaNome(Long codigoPedido) {
+        return String.format("nota-fiscal-%d.pdf", codigoPedido);
     }
 }

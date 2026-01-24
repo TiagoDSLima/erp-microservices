@@ -1,6 +1,21 @@
 package com.tiagolima.erp.faturamento.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
-public record ItemPedido(Long codigo, String descricao, BigDecimal valorUnitario, Integer quantidade, BigDecimal total) {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class ItemPedido {
+
+    private Long codigo;
+    private String descricao;
+    private BigDecimal valorUnitario;
+    private Integer quantidade;
+    private BigDecimal total;
 }

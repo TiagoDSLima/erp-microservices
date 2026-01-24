@@ -34,9 +34,9 @@ public class BucketController {
     }
 
     @GetMapping
-    public ResponseEntity<String> getUrl(@RequestParam String fileName) {
+    public ResponseEntity<String> getUrl(@RequestParam Long codigoPedido) {
         try{
-            String url = bucketService.getUrl(fileName);
+            String url = bucketService.getUrl(codigoPedido);
             return ResponseEntity.ok(url);
         } catch (Exception e){
             return ResponseEntity.status(500).body("Erro ao obter URL do arquivo: " + e.getMessage());
