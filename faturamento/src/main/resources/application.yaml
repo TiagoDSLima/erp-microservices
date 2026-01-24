@@ -5,8 +5,11 @@ spring:
 erpmicroservices:
   config:
     kafka:
+      server-url: 'http://localhost:29092'
+      group-id: 'erp-faturamento'
       topics:
         pedidos-pagos: 'erp.pedidos-pagos'
+        pedidos-faturas: 'erp.pedidos-faturados'
 
 server:
   port: 8084

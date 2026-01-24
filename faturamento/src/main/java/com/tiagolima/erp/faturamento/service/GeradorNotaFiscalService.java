@@ -3,6 +3,7 @@ package com.tiagolima.erp.faturamento.service;
 import com.tiagolima.erp.faturamento.bucket.BucketFile;
 import com.tiagolima.erp.faturamento.bucket.BucketService;
 import com.tiagolima.erp.faturamento.model.Pedido;
+import com.tiagolima.erp.faturamento.publisher.FaturamentoPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -26,6 +27,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class GeradorNotaFiscalService {
 
+    private final FaturamentoPublisher faturamentoPublisher;
     @Value("classpath:reports/nota-fiscal.jrxml")
     private Resource notaFiscal;
 
@@ -43,6 +45,10 @@ public class GeradorNotaFiscalService {
             var file = new BucketFile(nomeArquivo, new ByteArrayInputStream(byteArray), MediaType.APPLICATION_PDF, byteArray.length);
 
             bucketService.upload(file);
+            String url = bucketService.getUrl(pedido.getCodigo());
+            faturamentoPublisher.publicar(pedido, url);
+
+
             log.info("Gerada a nota fiscal para o pedido {}", pedido.getCodigo());
         } catch (Exception e) {
             log.error(e.getMessage(), e);

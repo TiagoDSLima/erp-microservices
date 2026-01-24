@@ -39,7 +39,7 @@ public class BucketService {
                     .method(Method.GET)
                     .bucket(minioProps.getBucketName())
                     .object(retornaNome(codigoPedido))
-                    .expiry(1, TimeUnit.HOURS)
+                    .expiry(7, TimeUnit.DAYS)
                     .build();
 
             return minioClient.getPresignedObjectUrl(obejct);
