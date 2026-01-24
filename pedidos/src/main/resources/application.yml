@@ -29,6 +29,8 @@ erpmicroservices:
       api-key: 'API_KEY_TESTE_123'
   config:
     kafka:
+      consumer:
+        group-id: 'erp-atualizacao-pedido'
       server-url: 'http://localhost:29092'
       topics:
         pedidos-pagos: 'erp.pedidos-pagos'
