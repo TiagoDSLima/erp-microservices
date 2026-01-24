@@ -3,7 +3,7 @@ package com.tiagolima.erp.faturamento.publisher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiagolima.erp.faturamento.enums.StatusPedido;
 import com.tiagolima.erp.faturamento.model.Pedido;
-import com.tiagolima.erp.faturamento.publisher.representation.AtualizacaoStatusPedido;
+import com.tiagolima.erp.faturamento.publisher.representation.AtualizacaoStatusPedidoRepresentation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,7 +23,7 @@ public class FaturamentoPublisher {
 
     public void publicar(Pedido pedido, String urlNotaFiscal) {
         try {
-            var representation = new AtualizacaoStatusPedido(pedido.getCodigo(), StatusPedido.FATURADO, urlNotaFiscal);
+            var representation = new AtualizacaoStatusPedidoRepresentation(pedido.getCodigo(), StatusPedido.FATURADO, urlNotaFiscal);
             String json = objectMapper.writeValueAsString(representation);
             kafkaTemplate.send(topico, "dados-faturamento", json);
         } catch (Exception e) {
