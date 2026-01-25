@@ -10,6 +10,18 @@ O objetivo principal do projeto é implementar um **sistema de pedidos robusto b
 
 ---
 
+## 🛠️ Tecnologias Utilizadas
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)&nbsp;
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)&nbsp;
+![Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)&nbsp;
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)&nbsp;
+![JUnit](https://img.shields.io/badge/junit-%23E33332?logo=junit5&logoColor=white)&nbsp;
+![MinIO](https://img.shields.io/badge/MinIO-S3%20Compatible-red?style=for-the-badge&logo=amazonaws&logoColor=white)&nbsp;
+![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)&nbsp;
+
+---
+
 ## 🧩 Microsserviços
 
 ### 👤 Clientes
@@ -90,18 +102,6 @@ Responsável pelo processo logístico.
 * Persistência independente por serviço
 * Consistência eventual
 * Armazenamento de arquivos com **MinIO (S3 compatible)**
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)&nbsp;
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)&nbsp;
-![Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)&nbsp;
-![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)&nbsp;
-![JUnit](https://img.shields.io/badge/junit-%23E33332?logo=junit5&logoColor=white)&nbsp;
-![MinIO](https://img.shields.io/badge/MinIO-S3%20Compatible-red?style=for-the-badge&logo=amazonaws&logoColor=white)&nbsp;
-![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)&nbsp;
 
 ---
 
