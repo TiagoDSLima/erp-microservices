@@ -109,7 +109,7 @@ Responsável pelo processo logístico.
 
 As configurações de infraestrutura do projeto estão organizadas em **docker-compose.yml**, separados por responsabilidade:
 
-* `broker/` → Apache Kafka, Kafka, Broker
+* `broker/` → Apache Kafka, Kafka UI, Broker
 * `database/` → Bancos de dados dos serviços (PostgreSQL)
 * `bucket/` → MinIO
 
