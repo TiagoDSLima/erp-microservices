@@ -119,6 +119,8 @@ Para executar o ambiente, basta acessar cada pasta e subir os containers:
 docker compose up -d
 ```
 
+Após o PostgreSQL estar em execução, é necessário executar o script **schemas.sql** para criar a estrutura inicial do banco de dados.
+
 ---
 
 ## 📌 Observações
